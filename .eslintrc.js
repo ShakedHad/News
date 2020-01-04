@@ -24,6 +24,13 @@ module.exports = {
   ],
   rules: {
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "linebreak-style": "off",
+    "react/jsx-filename-extension":"off",
+    "no-console":"off",
+    "indent": ["error", 4],
+    "eol-last":"off",
+    "import/prefer-default-export" : "off",
+    "react/jsx-indent": "off",
   }
 };

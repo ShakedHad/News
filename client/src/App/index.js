@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const styles = {
     app: {
         paddingTop: 40,
         textAlign: 'center',
     },
-}
+};
 
 export default () => {
     return (
@@ -13,4 +13,4 @@ export default () => {
             Welcome to React!
         </div>
     );
-}
+};
