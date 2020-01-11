@@ -8,6 +8,7 @@ export default () => {
     app.use('/static', express.static('../bundle'));
     app.use('/assets', express.static('assets'));
     app.use(morgan('dev', { immediate: true }));
+    app.use(express.json());
 
     app.use('/api', router);
 
