@@ -19,12 +19,13 @@ const PostSchema = new Schema({
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        required: true
     }
 });
 
