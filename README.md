@@ -1,6 +1,7 @@
 # Tickets
 
 npm scripts:  
+* npm run all - run both the client and the server  
 * npm run client-dev - run the client as dev  
 * npm run server-dev - run the server as dev  
 * npm run build-dev - compile the app in dev env  
