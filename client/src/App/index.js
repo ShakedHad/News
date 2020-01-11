@@ -5,9 +5,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
+import Post from '../Posts';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
@@ -22,7 +24,7 @@ export default function ButtonAppBar() {
 
     return (
         <div>
-            <AppBar position="absolute">
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -32,6 +34,9 @@ export default function ButtonAppBar() {
                     </FullTitle>
                 </Toolbar>
             </AppBar>
+            <Container maxWidth="md">
+                <Post />
+            </Container>
         </div>
     );
 }
