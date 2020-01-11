@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 // here we will configure the ExampleModel's router
 import { AsyncRouter } from 'express-async-router';
 import { getAllPosts, addPost, editPosts, getPost } from './Post.controller';

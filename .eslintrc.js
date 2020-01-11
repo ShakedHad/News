@@ -26,6 +26,8 @@ module.exports = {
         'eol-last': 'off',
         'import/prefer-default-export': 'off',
         'react/jsx-indent': 'off',
-        'comma-dangle': 'off'
+        'comma-dangle': 'off',
+        'consistent-return': 'off',
+        'object-curly-newline': 'off'
     }
 };
