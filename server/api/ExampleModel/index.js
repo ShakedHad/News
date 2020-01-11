@@ -1,9 +1,9 @@
 // here we will configure the ExampleModel's router
 import { AsyncRouter } from 'express-async-router';
-import { getExampleModal } from './ExampleModal.controller';
+import { getExampleModel } from './ExampleModel.controller';
 
 const router = AsyncRouter();
 
-router.get('/', getExampleModal);
+router.get('/', getExampleModel);
 
 export default router;
