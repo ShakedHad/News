@@ -1,5 +1,7 @@
 import express from 'express';
-import exampleModalRouter from './ExampleModal';
+import exampleModalRouter from './ExampleModel';
+import postRouter from './Post';
+import userRouter from './User';
 
 const router = express.Router();
 
@@ -10,5 +12,8 @@ router.get('/', (req, res) => {
 });
 
 router.use('/exampleModal', exampleModalRouter);
+router.use('/posts', postRouter);
+router.use('/users', userRouter);
+
 
 export default router;

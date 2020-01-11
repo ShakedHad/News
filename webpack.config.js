@@ -20,16 +20,19 @@ module.exports = {
             },
             {
                 test: /'.html$/,
-                use:'html-loader'
-            }
-        ]
+                use: 'html-loader'
+            },
+        ],
     },
     devServer: {
-        contentBase: path.join(__dirname, 'client/src')
+        contentBase: path.join(__dirname, 'client/src'),
+        proxy: {
+            '/api': 'http://localhost:9000',
+        },
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './client/src/index.html'
-        })
-    ]
+        }),
+    ],
 };
