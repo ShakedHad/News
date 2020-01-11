@@ -5,4 +5,4 @@ const exampleModelSchema = new Schema({
     title: String,
 });
 
-export default model('ExampleModal', exampleModelSchema);
+export default model('ExampleModel', exampleModelSchema);
