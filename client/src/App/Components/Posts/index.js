@@ -29,7 +29,7 @@ export default function Post(props) {
     const classes = useStyles();
 
     return (
-        <Card key={props.key} className={classes.card}>
+        <Card className={classes.card}>
             <CardContent>
                 <Typography variant="h5" component="h2">
                     {props.title}

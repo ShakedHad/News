@@ -16,7 +16,7 @@ export default function PostsList() {
 
     return (
         <div>
-{posts.map(post => <Post key={post.id} title={post.title} text={post.text} artist={post.artist} price={post.price}></Post>)}
+{posts.map(post => <Post key={post._id} title={post.title} text={post.text} artist={post.artist} price={post.price}></Post>)}
             {console.log(posts)}
 
         </div>
