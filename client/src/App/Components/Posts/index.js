@@ -10,6 +10,7 @@ import axios from 'axios';
 const useStyles = makeStyles({
     card: {
         minWidth: 275,
+        marginTop: 15
     },
     bullet: {
         display: 'inline-block',
@@ -24,30 +25,23 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Post() {
+export default function Post(props) {
     const classes = useStyles();
-
-    useEffect(() => {
-        (async () => {
-            const data = await axios.get('/api/posts');
-            console.log(data);
-        })();
-    });
 
     return (
         <Card className={classes.card}>
             <CardContent>
                 <Typography variant="h5" component="h2">
-                    Tickets to Aerosmith
+                    {props.title}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    27/02/2020
+                    27/02/2020 {props.artist}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    Hi, I'm selling tickets to the aerosmith concert
+                    {props.text}
                 </Typography>
                 <Typography align="right">
-                    250$
+                    {props.price}
                 </Typography>
             </CardContent>
             <CardActions>
