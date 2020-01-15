@@ -28,13 +28,11 @@ export default function Post() {
     const classes = useStyles();
 
     useEffect(() => {
-        (() => {
-            console.log('effect happened');
+        (async () => {
+            const data = await axios.get('/api/posts');
+            console.log(data);
         })();
-
     });
-
-    axios.get('/api/posts').then(data => console.log(data));
 
     return (
         <Card className={classes.card}>
