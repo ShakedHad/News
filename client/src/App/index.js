@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
-import Post from '../Posts';
+import Post from './Components/Posts';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
