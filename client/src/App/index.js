@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
-import Post from './Components/Posts';
+import PostsList from './Components/PostsList';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -35,7 +35,7 @@ export default function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
             <Container maxWidth="md">
-                <Post />
+                <PostsList />
             </Container>
         </div>
     );
