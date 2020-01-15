@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function PostsList() {
 
-    let posts; 
+   const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        (() => {
-            console.log('effect happened');
+        (async () => {
+            const response = await axios.get('/api/posts');
+            setPosts(response.data);
+            console.log('useEffect: ' + response);
         })();
-        axios.get('/api/posts').then(data => {
-            posts = data;
-            console.log(posts)});
-
     });
-
 
     return (
         <div>
-{posts.map(post => <p>hi</p>)}
+{/* {posts.map(post => <p>hi</p>)} */}
+            {console.log(posts)}
+            {posts.map( post => <p>hi</p>)}
+
         </div>
     );
 }

@@ -27,13 +27,6 @@ const useStyles = makeStyles({
 export default function Post() {
     const classes = useStyles();
 
-    useEffect(() => {
-        (async () => {
-            const data = await axios.get('/api/posts');
-            console.log(data);
-        })();
-    });
-
     return (
         <Card className={classes.card}>
             <CardContent>
