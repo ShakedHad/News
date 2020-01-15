@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Post from '../Posts';
 
 export default function PostsList() {
 
@@ -11,13 +12,12 @@ export default function PostsList() {
             setPosts(response.data);
             console.log('useEffect: ' + response);
         })();
-    });
+    }, []);
 
     return (
         <div>
-{/* {posts.map(post => <p>hi</p>)} */}
+{posts.map(post => <Post key={post.id} title={post.title} text={post.text} artist={post.artist} price={post.price}></Post>)}
             {console.log(posts)}
-            {posts.map( post => <p>hi</p>)}
 
         </div>
     );
