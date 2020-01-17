@@ -7,9 +7,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
-import PostsList from './Components/PostsList';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from 'react-router-dom';
+import PostsList from './Components/PostsList';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -19,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         bottom: theme.spacing(2),
         right: theme.spacing(2),
-      }
+    }
 }));
 
 const FullTitle = styled(Typography)`
@@ -42,11 +47,37 @@ export default function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
             <Container maxWidth="md">
-                <PostsList />
+                <Router>
+                    <Switch>
+                        <Route path="/login">
+                            login form
+                        </Route>
+                        <Route path="/register">
+                            register form
+                        </Route>
+                        <Route path="/about">
+                            about page
+                        </Route>
+                        <Route path="/feed">
+                            <PostsList />
+                            <Fab color="primary" aria-label="add" className={classes.fab}>
+                                <AddIcon />
+                            </Fab>
+                        </Route>
+                        <Route path="/userProfile">
+                            user profile
+                        </Route>
+                        <Route path="/">
+                            <PostsList />
+                            {/* TODO: implement that / will go to /feed if user is logged,
+                            if not go to /login */}
+                            <Fab color="primary" aria-label="add" className={classes.fab}>
+                                <AddIcon />
+                            </Fab>
+                        </Route>
+                    </Switch>
+                </Router>
             </Container>
-                <Fab color="primary" aria-label="add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
         </div>
     );
 }
