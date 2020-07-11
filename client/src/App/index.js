@@ -1,51 +1,83 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Container from '@material-ui/core/Container';
-import styled from 'styled-components';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import React, { useState, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from 'react-router-dom';
-import PostsList from './Components/PostsList';
+import { Layout, Menu, Typography, Tabs, Card } from 'antd';
+import 'antd/dist/antd.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import './index.css';
 
-const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    fab: {
-        position: 'absolute',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
-    }
-}));
-
-const FullTitle = styled(Typography)`
-    flex-grow: 1
-`;
+const { Header, Content } = Layout;
+const { TabPane } = Tabs;
+const { Meta } = Card;
 
 export default function ButtonAppBar() {
-    const classes = useStyles();
+    const [categories, setCategories] = useState([]);
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const categoriesRequest = await axios.get('/api/categories');
+            console.log(categoriesRequest.data);
+            setCategories(categoriesRequest.data);
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            const postsRequst = await axios.get('/api/posts');
+            console.log(postsRequst.data);
+            setPosts(postsRequst.data);
+        })();
+    }, []);
 
     return (
         <div>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <FullTitle variant="h6" className={classes.title}>
-                        Tickets
-                    </FullTitle>
-                </Toolbar>
-            </AppBar>
+            <Layout className="layout">
+                <Header>
+                    <div className="logo">
+                        <div>
+                            <FontAwesomeIcon icon={faNewspaper} size="lg" color="#ffffff88" />
+                            News Flash
+                        </div>
+                    </div>
+                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+                        <Menu.Item key="1">Home</Menu.Item>
+                        <Menu.Item key="2">Login</Menu.Item>
+                    </Menu>
+                </Header>
+                <Content style={{ padding: '0 50px' }}>
+                    <div className="site-layout-content">
+                        <Tabs>
+                            {
+                                categories.map((category, array, index) => (
+                                    <TabPane tab={category.name} key={category._id} tabKey={index} className="postsContainer">
+                                        {
+                                            posts.filter((post) => post.category === category._id).map((post) => (
+                                                <Card
+                                                    className="post"
+                                                    hoverable
+                                                    cover={<img alt="example" src="https://www.lendacademy.com/wp-content/uploads/2015/05/Marketplace-Lending-News.jpg" />}
+                                                    key={post._id}
+                                                >
+                                                    <Meta title={post.title} description={post.content} />
+                                                </Card>
+                                            ))
+                                        }
+                                    </TabPane>
+                                ))
+                            }
+                        </Tabs>
+                    </div>
+                </Content>
+            </Layout>
+
+
+            {/*
             <Container maxWidth="md">
                 <Router>
                     <Switch>
@@ -69,15 +101,13 @@ export default function ButtonAppBar() {
                         </Route>
                         <Route path="/">
                             <PostsList />
-                            {/* TODO: implement that / will go to /feed if user is logged,
-                            if not go to /login */}
                             <Fab color="primary" aria-label="add" className={classes.fab}>
                                 <AddIcon />
                             </Fab>
                         </Route>
                     </Switch>
                 </Router>
-            </Container>
+            </Container> */}
         </div>
     );
 }
