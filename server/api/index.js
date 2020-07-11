@@ -1,19 +1,12 @@
 import express from 'express';
-import exampleModalRouter from './ExampleModel';
+import categoryRouter from './Category';
 import postRouter from './Post';
-import userRouter from './User';
+import adminRouter from './Admin';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    // test route, can be deleted
-    console.log('hello');
-    res.send('hello');
-});
-
-router.use('/exampleModal', exampleModalRouter);
+router.use('/categories', categoryRouter);
 router.use('/posts', postRouter);
-router.use('/users', userRouter);
-
+router.use('/admins', adminRouter);
 
 export default router;

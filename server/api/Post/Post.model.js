@@ -3,23 +3,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PostSchema = new Schema({
-    user: {
+    category: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'categories'
     },
     title: {
-        type: String
-    },
-    text: {
         type: String,
         required: true
     },
-    artist: {
+    content: {
         type: String,
-        required: true
-    },
-    price: {
-        type: Number,
         required: true
     },
     date: {
