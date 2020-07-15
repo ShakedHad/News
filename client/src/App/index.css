@@ -41,3 +41,12 @@
 .ant-card-meta-description {
     text-overflow: ellipsis;
 }
+
+.login-button {
+    margin-left: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
