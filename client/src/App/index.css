@@ -33,3 +33,11 @@
   [data-theme="dark"] .logo {
     background: rgba(255,255,255,0.3);
   }
+  
+.layout {
+    height: 100%;
+}
+
+.ant-card-meta-description {
+    text-overflow: ellipsis;
+}
