@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Tabs, Card, Button } from 'antd';
+import { Tabs, Card, Button, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import PostModal from '../PostModal';
 import UserProvider from '../../Providers/UserProvide';
 import AddCategoryModal from '../AddCategoryModal';
 import AddPostModal from '../AddPostModal/Index';
+import { debug } from 'webpack';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -37,6 +38,10 @@ export default function Posts() {
         setPosts([...posts, newPost]);
     };
 
+    const filterPosts = (date) => {
+        posts.filter((post) => post.date === date);
+    };
+
     useEffect(() => {
         (async () => {
             const categoriesRequest = await axios.get('/api/categories');
@@ -59,21 +64,23 @@ export default function Posts() {
                 {
                     categories.map((category, array, index) => (
                         <TabPane tab={category.name} key={category._id} tabKey={index} className="postsContainer" closable={false}>
-                            {
-                                loggedAdmin.userId
-                                    ? (
-                                        <div className="newPostButtonContainer">
+                            <div className="newPostButtonContainer">
+                                <DatePicker onChange={filterPosts} />
+                                {
+                                    loggedAdmin.userId
+                                        ? (
                                             <Button
+                                                className="newPostButton"
                                                 icon={<PlusOutlined />}
                                                 onClick={() => {
                                                     setDisplayedCategory(category);
                                                     setNewPostModalVisibility(true);
                                                 }}
                                             />
-                                        </div>
-                                    )
-                                    : null
-                            }
+                                        )
+                                        : null
+                                }
+                            </div>
                             <div className="postContainer">
                                 {
                                     posts.filter((post) => post.category === category._id).map((post) => (
