@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Tabs, Card, Button, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import moment from 'moment';
 import PostModal from '../PostModal';
 import UserProvider from '../../Providers/UserProvide';
 import AddCategoryModal from '../AddCategoryModal';
 import AddPostModal from '../AddPostModal/Index';
-import { debug } from 'webpack';
+
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -39,7 +40,7 @@ export default function Posts() {
     };
 
     const filterPosts = (date) => {
-        posts.filter((post) => post.date === date);
+        setPosts(posts.filter((post) => date.isSame(moment(post.date), 'day')));
     };
 
     useEffect(() => {
