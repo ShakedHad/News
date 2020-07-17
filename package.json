@@ -7,9 +7,11 @@
     "all": "start npm run client-dev && start npm run server-dev",
     "client-dev": "webpack-dev-server --open",
     "server-dev": "nodemon --exec babel-node ./server/app.js",
-    "build-dev": "webpack --mode=development",
-    "build-prod": "webpack --mode=production",
-    "debug": "babel-node --inspect ./server/app.js"
+    "client-build-dev": "webpack --mode=development",
+    "client-build-prod": "webpack --mode=production",
+    "server-build": "npx babel ./server -d dist",
+    "debug": "babel-node --inspect ./server/app.js",
+    "serve": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/LilyZino/Tickets#readme",
   "devDependencies": {
     "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
@@ -43,7 +46,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
-    "@babel/node": "^7.10.4",
+    "@babel/cli": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/runtime": "^7.10.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
@@ -51,6 +56,7 @@
     "antd": "^4.4.2",
     "axios": "^0.19.2",
     "babel-node": "0.0.1-security",
+    "core-js": "^3.6.5",
     "dotenv-extended": "^2.8.0",
     "express": "^4.17.1",
     "express-async-router": "^0.1.15",
@@ -60,6 +66,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "regenerator-runtime": "^0.13.5",
     "styled-components": "^4.4.1"
   }
 }
