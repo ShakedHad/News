@@ -31,5 +31,6 @@ module.exports = {
     'object-curly-newline': 'off',
     "arrow-body-style": "off",
     "react/jsx-indent-props": "off",
+    "no-underscore-dangle": "off",
   }
 };

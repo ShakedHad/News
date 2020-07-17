@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Tabs, Card } from 'antd';
 import axios from 'axios';
-import PostModal from '../PostModal'
+import PostModal from '../PostModal';
+import UserProvider from '../../Providers/UserProvide';
+import AddCategoryModal from '../AddCategoryModal';
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -10,7 +12,20 @@ export default function Posts() {
     const [categories, setCategories] = useState([]);
     const [posts, setPosts] = useState([]);
     const [displayedPost, setDisplayedPost] = useState({});
-    const [displayedPostVisibillity ,setDisplayedPostVisibillity] = useState(false);
+    const [displayedPostModalVisibility, setDisplayedPostModalVisibility] = useState(false);
+    const [newCategoryModalVisibility, setNewCategoryModalVisibility] = useState(false);
+    const loggedAdmin = useContext(UserProvider);
+
+    const showAddCategoryModal = () => {
+        setNewCategoryModalVisibility(true);
+    };
+
+    const addCategory = async (values) => {
+        const newCategory = (await axios.put('/api/categories', values)).data;
+        setNewCategoryModalVisibility(false);
+        console.log([...categories, newCategory]);
+        setCategories([...categories, newCategory]);
+    };
 
     useEffect(() => {
         (async () => {
@@ -22,18 +37,18 @@ export default function Posts() {
 
     useEffect(() => {
         (async () => {
-            const postsRequst = await axios.get('/api/posts');
-            console.log(postsRequst.data);
-            setPosts(postsRequst.data);
+            const postsRequest = await axios.get('/api/posts');
+            console.log(postsRequest.data);
+            setPosts(postsRequest.data);
         })();
     }, []);
 
     return (
         <>
-            <Tabs>
+            <Tabs type={loggedAdmin.userId ? 'editable-card' : 'card'} onEdit={showAddCategoryModal}>
                 {
                     categories.map((category, array, index) => (
-                        <TabPane tab={category.name} key={category._id} tabKey={index} className="postsContainer">
+                        <TabPane tab={category.name} key={category._id} tabKey={index} className="postsContainer" closable={false}>
                             {
                                 posts.filter((post) => post.category === category._id).map((post) => (
                                     <Card
@@ -43,7 +58,7 @@ export default function Posts() {
                                         key={post._id}
                                         onClick={() => {
                                             setDisplayedPost(post);
-                                            setDisplayedPostVisibillity(true);
+                                            setDisplayedPostModalVisibility(true);
                                         }}
                                     >
                                         <Meta title={post.title} description={post.content} />
@@ -54,7 +69,8 @@ export default function Posts() {
                     ))
                 }
             </Tabs>
-            <PostModal post={displayedPost} visible={displayedPostVisibillity} onCancel={() => setDisplayedPostVisibillity(false)} />
+            <PostModal post={displayedPost} visible={displayedPostModalVisibility} onCancel={() => setDisplayedPostModalVisibility(false)} />
+            <AddCategoryModal visible={newCategoryModalVisibility} onOk={addCategory} onCancel={() => setNewCategoryModalVisibility(false)} />
         </>
     );
 }
