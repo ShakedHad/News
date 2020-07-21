@@ -1,3 +1,5 @@
+// Shir Avraham 315005660
+// Shaked Hadas 313161200
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';

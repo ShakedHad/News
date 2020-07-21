@@ -8,7 +8,6 @@ import UserProvider from '../../Providers/UserProvide';
 import AddCategoryModal from '../AddCategoryModal';
 import AddPostModal from '../AddPostModal/Index';
 
-
 const { TabPane } = Tabs;
 const { Meta } = Card;
 
@@ -21,6 +20,16 @@ export default function Posts() {
     const [newCategoryModalVisibility, setNewCategoryModalVisibility] = useState(false);
     const [newPostModalVisibility, setNewPostModalVisibility] = useState(false);
     const loggedAdmin = useContext(UserProvider);
+
+    const onPostClicked = async (post) => {
+        setDisplayedPost(post);
+        setDisplayedPostModalVisibility(true);
+        const ok = await axios.post(`/api/posts/${post._id}/views`);
+        const updatedPosts = posts;
+        const updatedPost = updatedPosts.find((postInList) => postInList._id === post._id);
+        updatedPost.numberOfViews += 1;
+        setPosts(updatedPosts);
+    };
 
     const showAddCategoryModal = () => {
         setNewCategoryModalVisibility(true);
@@ -90,12 +99,12 @@ export default function Posts() {
                                             hoverable
                                             cover={<img alt="example" src="https://www.lendacademy.com/wp-content/uploads/2015/05/Marketplace-Lending-News.jpg" />}
                                             key={post._id}
-                                            onClick={() => {
-                                                setDisplayedPost(post);
-                                                setDisplayedPostModalVisibility(true);
-                                            }}
+                                            onClick={() => onPostClicked(post)}
                                         >
-                                            <Meta title={post.title} description={post.content} />
+                                            <Meta
+                                                title={post.title}
+                                                description={`${post.content} (${moment(post.date).format('DD/MM/YYYY')})`}
+                                            />
                                         </Card>
                                     ))
                                 }

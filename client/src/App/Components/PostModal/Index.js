@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, Typography } from 'antd';
+import { EyeFilled } from '@ant-design/icons';
 
-const {Title, Paragraph} = Typography;
+const { Title, Paragraph } = Typography;
 
 export default function PostModal(props) {
     const { post, visible, onCancel } = props;
@@ -13,8 +14,15 @@ export default function PostModal(props) {
                 footer={null}
                 onCancel={onCancel}
             >
-                <Title>
-                    {post.title}
+                <Title className="post-title">
+                    <div>
+                        {post.title}
+                    </div>
+                    <div className="post-views">
+                        {post.numberOfViews}
+                        {' '}
+                        <EyeFilled />
+                    </div>
                 </Title>
                 <Paragraph>
                     {post.content}

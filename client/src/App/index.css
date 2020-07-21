@@ -46,6 +46,11 @@
     margin-left: auto;
 }
 
+.weather-info {
+  color: #001529;
+  margin-left: 5px;
+}
+
 .menu {
     display: flex;
     align-items: center;
@@ -63,4 +68,16 @@
 .postContainer {
   display: flex;
   flex-direction: row;
+}
+
+.post-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-views {
+    font-size: 0.5em;
+    color: darkgrey;
 }

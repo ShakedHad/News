@@ -1,10 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
+import cors from 'cors';
 import router from '../api';
 
 export default () => {
     const app = express();
+    app.use(cors());
     app.use('/assets', express.static('assets'));
     app.use(morgan('dev', { immediate: true }));
     app.use(express.json());

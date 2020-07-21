@@ -38,3 +38,18 @@ export const getPost = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+export const updateViewsNumber = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+
+        post.numberOfViews += 1;
+
+        post.save();
+
+        res.send();
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+};

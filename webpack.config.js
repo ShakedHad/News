@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: ['@babel/polyfill', './client/src/index.js'],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist/public'),
         filename: 'bundle.js'
     },
     module: {
@@ -30,6 +30,11 @@ module.exports = {
         contentBase: path.join(__dirname, 'client/src'),
         proxy: {
             '/api': 'http://localhost:9000',
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Methods': '*',
         },
         historyApiFallback: true,
     },
